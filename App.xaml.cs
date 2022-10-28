@@ -40,7 +40,7 @@ namespace Lopushok
 
         public static void LoadProducts()
         {
-            if(File.Exist(product.json))
+            //if(File.Exist(product.json))
         }
     }
 }

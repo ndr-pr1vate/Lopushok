@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\user\Desktop\Lopushok\Lopushok\obj\Debug\
+C:\Users\user\Desktop\lopuh\Lopushok\obj\Debug\
 Lopushok
 none
 false
 DEBUG;TRACE
-C:\Users\user\Desktop\Lopushok\Lopushok\App.xaml
-4-309119475
+C:\Users\user\Desktop\lopuh\Lopushok\App.xaml
+5-1239397581
 
-101445946024
-141622634706
-Pages\ProductDetailPage.xaml;Pages\ProductPage.xaml;UserControls\ProductUserControl.xaml;Windows\MainWindow.xaml;
+11-1056448100
+14-306495612
+Pages\ProductDetailPage.xaml;Pages\ProductPage.xaml;Pages\ProductsForLoadPage.xaml;UserControls\ProductUserControl.xaml;Windows\MainWindow.xaml;
 
 False
 

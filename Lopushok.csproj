@@ -73,6 +73,9 @@
     <Compile Include="Pages\ProductPage.xaml.cs">
       <DependentUpon>ProductPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ProductsForLoadPage.xaml.cs">
+      <DependentUpon>ProductsForLoadPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ProductUserControl.xaml.cs">
       <DependentUpon>ProductUserControl.xaml</DependentUpon>
     </Compile>
@@ -116,6 +119,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ProductPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ProductsForLoadPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

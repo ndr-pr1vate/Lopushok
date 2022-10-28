@@ -92,8 +92,14 @@ namespace Lopushok.Pages
 
         private void CreateBtn_Click(object sender, RoutedEventArgs e)
         {
-            var countString = Interaction("Введите кол-во продукции для погрузки: ","", "");
-
+            //var count = Interaction.InputBox("Введите кол-во продукции:", "", "1");
+            //if(int TryParse(countString, out var count) || count <= 0)
+            //        {
+            //    MessageBox.Show("Введите целое положительное число",
+            //        "Ошибка",
+            //        MessageBoxButton.OK,
+            //        Mes)
+            //}
         }
     }
 }
