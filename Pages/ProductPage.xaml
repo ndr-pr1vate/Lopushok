@@ -13,9 +13,10 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition  Height="auto"/>
+            <RowDefinition  Height="auto"/>
             <RowDefinition  Height="*"/>
         </Grid.RowDefinitions>
-        
+
         <Grid Margin="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -34,7 +35,16 @@
                 </Image>
             </Button>
         </Grid>
-        <ListView Grid.Row="1"
+
+        <Button 
+            x:Name="ListForSend"
+            Grid.Row="1"
+            Margin="5, 0"
+            Background="{StaticResource AccentColor}"
+            Content="Список на отправку"
+            Click="ListForSend_Click"/>
+        
+        <ListView Grid.Row="2"
                   Padding="10"
                   x:Name="ProductsLv"
                   SelectionChanged ="ProductsLv_SelectionChanged"

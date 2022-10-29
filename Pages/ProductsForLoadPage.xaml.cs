@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -45,7 +46,7 @@ namespace Lopushok.Pages
                         return y;
                     })
                     .ToList();
-                ProductsToLooadLv.ItemSource = Products;
+                ProductsToLooadLv.ItemsSource = Products;
             }
             catch
             {
@@ -64,7 +65,34 @@ namespace Lopushok.Pages
 
         private void SendBtn_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                var content = new StringContent(JsonConvert.SerializeObject(App.ProductsToLoad));
 
+                var result = App.Client.PostAsync("/api/load/?competitor=2", content).Result;
+                result.EnsureSuccessStatusCode();
+
+                MessageBox.Show("Список продукции отправлен",
+                    "Успех",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information
+                    );
+
+                App.ProductsToLoad.Clear();
+                App.SaveProducts();
+
+                NavigationService.GoBack();
+
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoadData();
         }
     }
 }

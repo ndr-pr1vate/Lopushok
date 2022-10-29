@@ -1,7 +1,12 @@
-﻿using System;
+﻿using Lopushok.Models;
+
+using Newtonsoft.Json;
+
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -14,7 +19,11 @@ namespace Lopushok
     /// </summary>
     public partial class App : Application
     {
+        private const string productsToLoadFileName = "products.json";
+
         public static HttpClient Client { get; set; }
+
+        public static List<LoadModel> ProductsToLoad { get; set; } = new List<LoadModel>();
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
@@ -40,7 +49,42 @@ namespace Lopushok
 
         public static void LoadProducts()
         {
-            //if(File.Exist(product.json))
+            try
+            {
+                if (!File.Exists(productsToLoadFileName))
+                    return;
+
+                var products = JsonConvert.DeserializeObject<List<LoadModel>>(File.ReadAllText(productsToLoadFileName));
+                ProductsToLoad = products
+                    .GroupBy(x => x.ProductId)
+                    .Select(x => new LoadModel()
+                    {
+                        ProductId = x.Key,
+                        Count = x.Sum(y => y.Count)
+                    }).ToList();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        public static void SaveProducts()
+        {
+            try
+            {
+                var products = ProductsToLoad
+                    .GroupBy(x => x.ProductId)
+                    .Select(x => new LoadModel()
+                    {
+                        ProductId = x.Key,
+                        Count = x.Sum(y => y.Count)
+                    }).ToList();
+                ProductsToLoad = products;
+                File.WriteAllText(productsToLoadFileName, JsonConvert.SerializeObject(products));
+            }
+            catch (Exception)
+            {
+            }
         }
     }
 }

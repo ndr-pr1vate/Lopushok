@@ -1,5 +1,9 @@
 ﻿using Lopushok.Models;
+
+using Microsoft.VisualBasic;
+
 using Newtonsoft.Json;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -92,14 +96,40 @@ namespace Lopushok.Pages
 
         private void CreateBtn_Click(object sender, RoutedEventArgs e)
         {
-            //var count = Interaction.InputBox("Введите кол-во продукции:", "", "1");
-            //if(int TryParse(countString, out var count) || count <= 0)
-            //        {
-            //    MessageBox.Show("Введите целое положительное число",
-            //        "Ошибка",
-            //        MessageBoxButton.OK,
-            //        Mes)
-            //}
+            var countString = Interaction.InputBox("Введите кол-во продукции:", "", "1");
+            if (!int.TryParse(countString, out var count) || count <= 0)
+            {
+                MessageBox.Show("Введите целое положительное число",
+                    "Ошибка",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+                return;
+            }
+
+            LoadData();
+
+            if(count > Product.CountInStock)
+            {
+                MessageBox.Show("Кол-во для погрузки больше чем на складе!",
+                    "Ошибка",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
+                    );
+                return;
+            }
+
+            App.ProductsToLoad.Add(new LoadModel()
+            {
+                ProductId = Product.Id,
+                Count = count
+            });
+            App.SaveProducts();
+
+            MessageBox.Show("Товар добавлен в список на отправку",
+                "Успех",
+                MessageBoxButton.OK,
+                MessageBoxImage.Information
+                );
         }
     }
 }

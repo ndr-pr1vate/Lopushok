@@ -36,6 +36,10 @@ namespace Lopushok.Pages
                 var result = App.Client.GetStringAsync("/").Result;
                 Products = JsonConvert.DeserializeObject<List<Product>>(result);
                 ProductsLv.ItemsSource = Products;
+
+                ListForSend.Visibility = App.ProductsToLoad.Count == 0
+                    ? Visibility.Collapsed
+                    : Visibility.Visible;
             }
             catch
             {
@@ -58,6 +62,11 @@ namespace Lopushok.Pages
             {
                 NavigationService.Navigate( new ProductDetailPage(product));
             }
+        }
+
+        private void ListForSend_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ProductsForLoadPage());
         }
 
         //private void ProductsLv_Selected(object sender, RoutedEventArgs e)
